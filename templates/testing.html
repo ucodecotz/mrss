@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Predict Admission Chances</title>
+
+</head>
+<body>
+
+<h1>Predict Admission Chances</h1>
+<form action="{% url 'predict'%}" method="POST">
+    {% csrf_token %}
+    GRE Score <br/>
+    <input type="number"name="gre_score" id="gre_score"/>
+    <p></p>
+
+    TOEFL Score <br/>
+    <input type="number" name="toefl_score" id="toefl_score"/>
+    <p></p>
+
+    CGPA <br/>
+    <input type="number" name="cgpa" id="cgpa"/>
+    <p></p>
+<button  onclick="predict_chances()" >Predict Chances</button>
+</form>
+<h2 id="chances"></h2>
+
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+{#    <script src="{%  static 'vendor/jquery/jquery.min.js' %}"></script>#}
+  <script src="{%  static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{%  static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{%  static 'js/sb-admin-2.min.js'%}"></script>
+
+  <!-- Page level plugins -->
+  <script src="{%  static 'vendor/chart.js/Chart.min.js'%}"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{%  static 'js/demo/chart-area-demo.js'%}"></script>
+  <script src="{%  static 'js/demo/chart-pie-demo.js'%}"></script>
+
+
+<script>
+        function predict_chances() {
+           {#url = "http://127.0.0.1:8000/predict?gre=" + $("#gre_score").val() +#}
+           {#      "&toefl=" + $("#toefl_score").val() +#}
+           {#      "&cgpa=" + $("#cgpa").val();#}
+            url= {% url 'predict' %}
+
+           // Make AJAX request
+           $.post(url,
+                 null,
+                 function(result) {
+                    $("#chances").text(result);
+                 }
+           );
+        }
+    </script>
+</body>
+</html>
