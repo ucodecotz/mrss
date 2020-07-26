@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils import timezone
@@ -46,7 +47,7 @@ class Solution(models.Model):
 class Comments(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-    content = models.TextField(null=True,blank=True)
+    content = models.TextField(null=True, blank=True)
     solution_id = models.ForeignKey(Solution, on_delete=models.CASCADE,
                                     null=True, blank=True)
 
@@ -55,3 +56,16 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+# eg.
+
+class BlogPost(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    title = models.CharField(max_length=300, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Blog'
+
+    def __str__(self):
+        return self.title

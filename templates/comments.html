@@ -281,6 +281,7 @@
           <!-- Content Row -->
             <div class="row">
             <div class="col-md-12">
+
                 <div class="card card-margin">
                     <div class="card-header no-border">
                         <h5 class="card-title">{{ object.title }}</h5>
@@ -313,30 +314,23 @@
                               <div class="post-text">
 
                                 <p>
-                                    {% for solution in object.solution_set.all %}
-                                         <h1>Solutions {{ forloop.counter }}</h1>
+                                    {% for comm in comment %}
+                                         <h1>Comment No: {{ forloop.counter }}</h1>
 
-                                        <p style="color: #0E2231;"><b>{{ solution.content|safe}}</b> </p>
+                                        <p style="color: #0E2231;"><b>{{ comm.content}}</b> </p>
 
                               <div class="form-group mt-4">
-                                  <form action="{% url 'core:post_comment' solution.id  %}" method="post">
-                                        {% csrf_token %}
-                                      <div class="form-group">
-                                        <label for="" class="active">Add your comments/solutions </label>
-                                        <textarea name="content" placeholder="Leave a comment" class="form-control" id="content" rows="3"></textarea>
-                                      </div>
-                                        <button class="btn btn-info waves-effect waves-light" type="submit"><i class="fa fa-paper-plane g-pos-rel g-top-1 g-mr-3"></i> Send</button>
-                                    </form>
+
                                 </div>
                                 </p>
                               </div>
 
 
                                 <span class="mr-2">
-                                  <a href=" "><i class="fas fa-circle text-primary"></i> <b>Solutions</b> </a>
+                                  <a href="/problem_details/poor-battery-life "><i class="fas fa-circle text-primary">2</i> <b>Solutions</b> </a>
                                 </span>
                                 <span class="mr-2">
-                                   <a href="{% url 'core:comments' solution.id %}"><i class="fas fa-circle text-success"></i> <b>Comments</b></a>
+                                   <a href=""><i class="fas fa-circle text-success"></i> <b>Comments</b></a>
                                 </span>
                                 <span class="mr-2">
                                   <a href=""><i class="fas fa-circle text-info"></i> views</a>

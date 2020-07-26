@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 import pandas as pd
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from .models import *
 from .forms import *
 
@@ -19,7 +19,6 @@ class problemDetails(DetailView):
 
 
 def post_comments(request, pk):
-
     solution = get_object_or_404(Solution, pk=pk)
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -30,12 +29,23 @@ def post_comments(request, pk):
             new_comment.solution_id = solution
             new_comment.content = content
             new_comment.save()
+
             messages.info(request, 'your messages is submitted successfully')
+
             return redirect('core:problem_details', slug=solution.problem_id.slug)
         else:
             messages.info(request, 'form is invalid')
             return redirect('core:problem_details', slug=solution.problem_id.slug)
     return redirect('core:problem_details', slug=solution.problem_id.slug)
+
+
+def View_comments(request, pk=None):
+    solution = get_object_or_404(Solution, pk=pk)
+    comments_qs = Comments.objects.filter(solution_id=solution)
+    context = {
+        'comment': comments_qs
+    }
+    return render(request, 'comments.html', context)
 
 
 def predict_chances(request):
@@ -51,3 +61,5 @@ def predict_chances(request):
         model = pd.read_pickle(r"/home/jena/PycharmProjects/mrss/core/lr_model.pickle")
         chances = model.predict([[gre, toefl, cgpa]])
         return HttpResponse(f"{chances[0] * 100:.2f}%")
+
+# Todo  add models data to tempalate
