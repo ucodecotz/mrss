@@ -7,5 +7,6 @@ urlpatterns = [
     path('post_comment/<int:pk>', views.post_comments, name='post_comment'),
     path('predict/', views.predict_chances, name='predict'),
     path('comments/<int:pk>', views.View_comments, name='comments'),
+    path('blog_post_view/', views.blog_post_view, name='blog_post_view'),
 ]
 

@@ -62,4 +62,13 @@ def predict_chances(request):
         chances = model.predict([[gre, toefl, cgpa]])
         return HttpResponse(f"{chances[0] * 100:.2f}%")
 
+
 # Todo  add models data to tempalate
+
+def blog_post_view(request):
+    blog_post_qs = BlogPost.objects.all()
+    context = {
+        'post_list': blog_post_qs,
+    }
+    return render(request, 'blog.html', context)
+
