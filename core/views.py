@@ -5,6 +5,8 @@ import pandas as pd
 from django.views.generic import ListView, DetailView, View
 from .models import *
 from .forms import *
+from django.db.models import Q
+
 
 
 class ProblemList(ListView):
@@ -72,3 +74,25 @@ def blog_post_view(request):
     }
     return render(request, 'blog.html', context)
 
+
+def search_problem(request):
+    if request.method == 'GET':
+        query = request.GET.get('q')
+
+        problem_submitted = request.GET.get('submit')
+
+        if query is not None:
+            lookups = Q(title__icontains=query) | Q(problem_type__icontains=query)
+
+            results = Problems.objects.filter(lookups).distinct()
+
+            context = {'results': results,
+                       'submitbutton': problem_submitted}
+
+            return render(request, 'index.html', context)
+
+        else:
+            return render(request, 'index.html')
+
+    else:
+        return render(request, 'index.html')

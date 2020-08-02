@@ -8,5 +8,7 @@ urlpatterns = [
     path('predict/', views.predict_chances, name='predict'),
     path('comments/<int:pk>', views.View_comments, name='comments'),
     path('blog_post/', views.blog_post_view, name='blog_post_view'),
+    path('search/', views.search_problem, name='search'),
+
 ]
 
