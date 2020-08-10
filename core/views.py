@@ -2,17 +2,54 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 import pandas as pd
+from django.utils.text import slugify
 from django.views.generic import ListView, DetailView, View
 from .models import *
 from .forms import *
 from django.db.models import Q
-
+from .forms import ProblemForm
 
 
 class ProblemList(ListView):
     model = Problems
     template_name = 'index.html'
     # context_object_name = ''
+
+
+class PresentProblem(View):
+
+    def get(self, *args, **kwargs):
+        form = ProblemForm()
+        context = {
+            'form': form
+        }
+        return render(self.request, 'present_problem.html', context)
+
+    def post(self, *args, **kwargs):
+        form = ProblemForm(self.request.POST or None, self.request.FILES or None)
+
+        if form.is_valid():
+            print(form)
+            device_type = form.cleaned_data.get('device_type')
+            device_brand = form.cleaned_data.get('device_brand')
+            title = form.cleaned_data.get('title')
+            image = form.cleaned_data.get('image')
+            problem_desc = form.cleaned_data.get('problem_desc')
+            problem = Problems()
+            problem.user = self.request.user.userprofile
+            problem.title =title
+            problem.image=image
+            problem.device_brand =device_brand
+            problem.device_type =device_type
+            problem.problem_desc = problem_desc
+            problem.slug = slugify(title)
+            problem.save()
+            messages.success(self.request, 'Thanks for presenting your problem to MRSS')
+            return redirect('/')
+        else:
+            print('form not valid')
+            messages.warning(self.request, 'Your form was not valid try to fill all field')
+            return redirect('core:presentProblem')
 
 
 class problemDetails(DetailView):

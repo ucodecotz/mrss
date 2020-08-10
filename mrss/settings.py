@@ -37,7 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'ckeditor',
+    'crispy_forms',
+
+
+    # authentications app, is third part app
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
     # our own application
 
@@ -55,6 +64,22 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mrss.urls'
+
+SITE_ID = 1
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    }
+}
 
 TEMPLATES = [
     {
@@ -129,5 +154,9 @@ LOGIN_REDIRECT_URL = "/"
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+
+# CRISPY_TEMPLATE_PACK = 'uni_form'
 
 

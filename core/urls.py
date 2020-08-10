@@ -9,6 +9,7 @@ urlpatterns = [
     path('comments/<int:pk>', views.View_comments, name='comments'),
     path('blog_post/', views.blog_post_view, name='blog_post_view'),
     path('search/', views.search_problem, name='search'),
+    path('presentProblem/', views.PresentProblem.as_view(), name='presentProblem'),
 
 ]
 
