@@ -26,7 +26,7 @@ DEVICE_BRAND_CHOICE = (
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    images = models.FileField(upload_to='<user_profile')
+    images = models.FileField(upload_to='user_profile')
 
     class Meta:
         verbose_name_plural = ' Uer profile'
