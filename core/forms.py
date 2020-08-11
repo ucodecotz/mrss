@@ -29,7 +29,18 @@ class ProblemForm(forms.Form):
     problem_desc = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control',
         'cols': 25,
-        'rows': 3
+        'rows': 6
     }))
-    device_type = forms.ChoiceField(choices=DEVICE_TYPE_CHOICE)
-    device_brand = forms.ChoiceField(choices=DEVICE_BRAND_CHOICE)
+    device_type = forms.ChoiceField(choices=DEVICE_TYPE_CHOICE, widget=forms.Select(attrs={
+        'class': 'form-control'
+    }))
+    device_brand = forms.ChoiceField(choices=DEVICE_BRAND_CHOICE, widget=forms.Select(attrs={
+        'class': 'form-control'
+    }))
+
+
+class AddSolutionForm(forms.Form):
+    content = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'placeholder': 'Add your Solution to this problem'
+    }))

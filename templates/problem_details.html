@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
 {% block content %}
 
 
@@ -13,10 +14,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Fix your mobile device issues with MRSS</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-          </div>
+            {% include 'present_problem_snipet.html' %}
 
           <!-- Content Row -->
 
@@ -44,7 +42,7 @@
                             <img src="{{ object.user.images.url}}" alt="user" class="profile-photo-md pull-left">
                             <div class="post-detail">
                               <div class="user-info">
-                                <h5><a href="timeline.html" class="profile-link">{{ object.user }}</a> <span class="following"></span></h5>
+                                <h5><a href="#" class="profile-link">{{ object.user }}</a> <span class="following"></span></h5>
                                 <p class="text-muted">{{ object.created_on }}</p>
                               </div>
 
@@ -52,7 +50,19 @@
 {#                                <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 13</a>#}
 {#                                <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>#}
 {#                              </div>#}
-                              <div class="line-divider"></div>
+                              <div class="line-divider">
+                                  <form method="post" action=" {% url 'core:post_solution' object.id  %}">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+                                      <div class="form-group col-md-6 mb-0">
+                                        {{ form.content|as_crispy_field }}
+                                      </div>
+
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                  </form>
+                              </div>
                               <div class="post-text">
 
                                 <p>
