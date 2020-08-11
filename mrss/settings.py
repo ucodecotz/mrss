@@ -160,4 +160,12 @@ LOGIN_REDIRECT_URL = "/"
 
 # CRISPY_TEMPLATE_PACK = 'uni_form'
 
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'wadadaapp@gmail.com'
+EMAIL_HOST_PASSWORD = 'wadda@1a23'
+EMAIL_PORT = 587
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+
 
