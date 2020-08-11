@@ -56,7 +56,7 @@ class Problems(models.Model):
     created_on = models.DateTimeField(default=timezone.now)
     device_type = models.CharField(max_length=200, choices=DEVICE_TYPE_CHOICE, null=True, blank=True)
     device_brand = models.CharField(max_length=200, choices=DEVICE_BRAND_CHOICE, null=True, blank=True)
-    problem_desc = models.TextField(null= True, blank=True)
+    problem_desc = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'Problems'
@@ -80,11 +80,12 @@ class Solution(models.Model):
 
 
 class Comments(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(UserProfile,
                              on_delete=models.CASCADE)
     content = models.TextField(null=True, blank=True)
     solution_id = models.ForeignKey(Solution, on_delete=models.CASCADE,
                                     null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'Comments'
