@@ -44,7 +44,9 @@
                                 <p>
                                     {% for comm in comment %}
                                          <h1>Comment No: {{ forloop.counter }}</h1>
+                                         {% if comm.user.images  %}
                                            <img src="{{ comm.user.images.url }}" alt="user" class="profile-photo-md pull-left">
+                                        {% endif %}
                                             <div class="user-info">
                                                 <h5><a href="timeline.html" class="profile-link">{{ comm.user}}</a> <span class="following">following</span></h5>
                                                 <p class="text-muted">Published at : {{ comm.created }}</p>
@@ -52,24 +54,12 @@
 
                                         <p style="color: #0E2231;"><b>{{ comm.content}}</b> </p>
 
-                              <div class="form-group mt-4">
 
-                                </div>
-                                </p>
+                                        </div>
+
                               </div>
-
-
                                         <hr>
                                 {% endfor %}
-{#                              <div class="post-comment">#}
-{#                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="profile-photo-sm">#}
-{#                                <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>#}
-{#                              </div>#}
-{#                              <div class="post-comment">#}
-{#                                <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm">#}
-{#                                <input type="text" class="form-control" placeholder="Post a comment">#}
-{#                              </div>#}
-
 
                             </div>
                           </div>

@@ -91,7 +91,7 @@ class Comments(models.Model):
         verbose_name_plural = 'Comments'
 
     def __str__(self):
-        return self.user.username
+        return str(self.user)
 
 
 # eg.
