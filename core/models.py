@@ -47,7 +47,7 @@ class Problems(models.Model):
     user = models.ForeignKey(UserProfile,
                              on_delete=models.CASCADE)
     title = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(upload_to='Pro_image', null=True, blank=True)
+    image = models.FileField(upload_to='Pro_image', null=True, blank=True)
     # Problem_code = models.CharField(max_length=200, null=True, blank=True)
     problem_type = models.CharField(max_length=200,
                                     choices=PROBLEM_TYPE, null=True, blank=True)

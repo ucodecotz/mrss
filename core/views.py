@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-import pandas as pd
+# import pandas as pd
 from django.utils.text import slugify
 from django.views.generic import ListView, DetailView, View
 from .models import *
@@ -87,19 +87,19 @@ def View_comments(request, pk=None):
     return render(request, 'comments.html', context)
 
 
-def predict_chances(request):
-    # Receive data from client
-    # gre = int(request.GET['gre'])
-    # toefl = int(request.GET['toefl'])
-    # cgpa = float(request.GET['cgpa'])
-    if request.method == "POST":
-        gre = int(request.POST['gre_score'])
-        toefl = int(request.POST['toefl_score'])
-        cgpa = float(request.POST['cgpa'])
-
-        model = pd.read_pickle(r"/home/jena/PycharmProjects/mrss/core/lr_model.pickle")
-        chances = model.predict([[gre, toefl, cgpa]])
-        return HttpResponse(f"{chances[0] * 100:.2f}%")
+# def predict_chances(request):
+#     # Receive data from client
+#     # gre = int(request.GET['gre'])
+#     # toefl = int(request.GET['toefl'])
+#     # cgpa = float(request.GET['cgpa'])
+#     if request.method == "POST":
+#         gre = int(request.POST['gre_score'])
+#         toefl = int(request.POST['toefl_score'])
+#         cgpa = float(request.POST['cgpa'])
+#
+#         model = pd.read_pickle(r"/home/jena/PycharmProjects/mrss/core/lr_model.pickle")
+#         chances = model.predict([[gre, toefl, cgpa]])
+#         return HttpResponse(f"{chances[0] * 100:.2f}%")
 
 
 # Todo  add models data to tempalate
