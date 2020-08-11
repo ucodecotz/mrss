@@ -41,7 +41,7 @@
                               <div class="line-divider"></div>
                               <div class="post-text">
 
-                                <p>
+                                  <div class="form-group mt-4">
                                     {% for comm in comment %}
                                          <h1>Comment No: {{ forloop.counter }}</h1>
                                          {% if comm.user.images  %}
@@ -52,14 +52,14 @@
                                                 <p class="text-muted">Published at : {{ comm.created }}</p>
                                             </div>
 
-                                        <p style="color: #0E2231;"><b>{{ comm.content}}</b> </p>
-
-
-                                        </div>
+                                        <p style="color: #0E2231; margin-left: 30px;"><b>{{ comm.content}}</b> </p>
+                                        <hr>
+                                    {% endfor %}
+                                </div>
 
                               </div>
-                                        <hr>
-                                {% endfor %}
+
+
 
                             </div>
                           </div>
