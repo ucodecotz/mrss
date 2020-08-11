@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView, View
 from .models import *
 from .forms import *
 from django.db.models import Q
-from .forms import ProblemForm
+from .forms import ProblemForm, AddSolutionForm
 
 
 class ProblemList(ListView):
@@ -37,10 +37,10 @@ class PresentProblem(View):
             problem_desc = form.cleaned_data.get('problem_desc')
             problem = Problems()
             problem.user = self.request.user.userprofile
-            problem.title =title
-            problem.image=image
-            problem.device_brand =device_brand
-            problem.device_type =device_type
+            problem.title = title
+            problem.image = image
+            problem.device_brand = device_brand
+            problem.device_type = device_type
             problem.problem_desc = problem_desc
             problem.slug = slugify(title)
             problem.save()
@@ -52,9 +52,45 @@ class PresentProblem(View):
             return redirect('core:presentProblem')
 
 
+class AddSolutionsView(View):
+    def get(self, *args, **kwargs):
+        form = AddSolutionForm()
+        context = {
+            'form': form
+        }
+        return render(self.request, 'add_solution.html', context)
+
+
+def post_solutions(request, pk=None):
+    problem = get_object_or_404(Problems, pk=pk)
+    if request.method == "POST":
+        form = AddSolutionForm(request.POST)
+        if form.is_valid():
+            print(form)
+            solution_content = form.cleaned_data.get('content')
+            solution = Solution()
+            solution.problem_id = problem
+            solution.content = solution_content
+            solution.user = request.user.userprofile
+            solution.save()
+            messages.success(request, f'Thanks for submitting you solution to {problem.title} ')
+            return redirect('core:problem_details', slug=problem.slug)
+        else:
+            messages.warning(request, 'something went wrong with your form submission')
+        return redirect('core:add_solutions', )
+
+
 class problemDetails(DetailView):
     model = Problems
     template_name = 'problem_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(problemDetails, self).get_context_data()
+        form = AddSolutionForm()
+        context.update({
+            'form': form
+        })
+        return context
 
 
 def post_comments(request, pk):

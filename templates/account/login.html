@@ -34,7 +34,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 <p>{% blocktrans %}If you have not created an account yet, then please
 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}
-<form class="text-center border border-light p-5" method="POST" action="{% url 'account_login' %}">
+<form method="POST" action="{% url 'account_login' %}" enctype="multipart/form-data">
   {% csrf_token %}
     <div class="form-row">
 {#      <div class="form-group col-md-6 mb-0">#}

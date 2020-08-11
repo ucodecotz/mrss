@@ -10,6 +10,8 @@ urlpatterns = [
     path('blog_post/', views.blog_post_view, name='blog_post_view'),
     path('search/', views.search_problem, name='search'),
     path('presentProblem/', views.PresentProblem.as_view(), name='presentProblem'),
+    path('add_solutions/', views.AddSolutionsView.as_view(), name='add_solutions'),
+    path('post_solution/<int:pk>', views.post_solutions, name='post_solution'),
 
 ]
 

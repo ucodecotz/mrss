@@ -13,10 +13,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Fix your mobile device issues with MRSS</h1>
-            <a href="{% url 'core:presentProblem' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Present Problem</a>
-          </div>
+        {% include 'present_problem_snipet.html' %}
 
           <!-- Content Row -->
 
@@ -32,7 +29,7 @@
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
-                          <h5 class="m-0 font-weight-bold text-primary"> Where looking for {{ request.GET.q }} problem?</h5>
+                          <h5 class="m-0 font-weight-bold text-primary"> You are for looking for {{ request.GET.q }} problem?</h5>
                           <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -60,10 +57,10 @@
                               <a href="{% url 'core:problem_details' result.slug %} "><i class="fas fa-circle text-primary">{{result.solution_set.count }}</i> <B>Solutions</B> </a>
                             </span>
                             <span class="mr-2">
-                               <a href=""><i class="fas fa-circle text-success"></i> <b>Comments</b></a>
+                               <a href=""><i class="fas fa-circle text-success"></i> <b>Add solution</b></a>
                             </span>
                             <span class="mr-2">
-                              <a href=""><i class="fas fa-circle text-info"></i> views</a>
+                              <a href=""><i class="fas fa-circle text-info"></i> </a>
                             </span>
                           </div>
                         </div>
@@ -112,11 +109,11 @@
                     <span class="mr-2">
                       <a href="{% url 'core:problem_details' problem.slug %} "><i class="fas fa-circle text-primary">{{problem.solution_set.count }}</i> <B>Solutions</B> </a>
                     </span>
+{#                    <span class="mr-2">#}
+{#                       <a href="{% url 'core:add_solutions' %}"><i class="fas fa-circle text-success"></i> <b>Add solution</b></a>#}
+{#                    </span>#}
                     <span class="mr-2">
-                       <a href=""><i class="fas fa-circle text-success"></i> <b>Comments</b></a>
-                    </span>
-                    <span class="mr-2">
-                      <a href=""><i class="fas fa-circle text-info"></i> views</a>
+{#                      <a href=""><i class="fas fa-circle text-info"></i> </a>#}
                     </span>
                   </div>
                 </div>

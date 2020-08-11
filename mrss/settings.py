@@ -149,13 +149,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-LOGIN_REDIRECT_URL = "/"
+
 
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+LOGIN_REDIRECT_URL = "/"
+# ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 
 # CRISPY_TEMPLATE_PACK = 'uni_form'
 
