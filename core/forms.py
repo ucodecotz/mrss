@@ -42,5 +42,6 @@ class ProblemForm(forms.Form):
 class AddSolutionForm(forms.Form):
     content = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control',
-        'placeholder': 'Add your Solution to this problem'
+        'placeholder': 'Add your Solution to this problem',
+        'cols': 100
     }))

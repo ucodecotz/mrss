@@ -31,24 +31,9 @@
                     </div>
                     <div class="card-body pt-0">
                         <div class="widget-49">
-                            <div class="widget-49-title-wrapper">
-                                <div class="widget-49-date-primary">
-                                    <span class="widget-49-date-day">09</span>
-                                    <span class="widget-49-date-month">apr</span>
-                                </div>
-                                <div class="widget-49-meeting-info">
-                                    <span class="widget-49-pro-title">PRO-08235 DeskOpe. Website</span>
-                                    <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
-                                </div>
-                            </div>
-                            <div class="post-container">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" class="profile-photo-md pull-left">
-                            <div class="post-detail">
-                              <div class="user-info">
-                                <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
-                                <p class="text-muted">Published a photo about 3 mins ago</p>
-                              </div>
 
+                            <div class="post-container">
+                            <div class="post-detail">
 {#                              <div class="reaction">#}
 {#                                <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 13</a>#}
 {#                                <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>#}
@@ -59,6 +44,11 @@
                                 <p>
                                     {% for comm in comment %}
                                          <h1>Comment No: {{ forloop.counter }}</h1>
+                                           <img src="{{ comm.user.images.url }}" alt="user" class="profile-photo-md pull-left">
+                                            <div class="user-info">
+                                                <h5><a href="timeline.html" class="profile-link">{{ comm.user}}</a> <span class="following">following</span></h5>
+                                                <p class="text-muted">Published at : {{ comm.created }}</p>
+                                            </div>
 
                                         <p style="color: #0E2231;"><b>{{ comm.content}}</b> </p>
 
@@ -69,20 +59,6 @@
                               </div>
 
 
-                                <span class="mr-2">
-                                  <a href="/problem_details/poor-battery-life "><i class="fas fa-circle text-primary">2</i> <b>Solutions</b> </a>
-                                </span>
-                                <span class="mr-2">
-                                   <a href=""><i class="fas fa-circle text-success"></i> <b>Comments</b></a>
-                                </span>
-                                <span class="mr-2">
-                                  <a href=""><i class="fas fa-circle text-info"></i> views</a>
-                                </span>
-                                        <ol class="widget-49-meeting-points">
-                                            <li class="widget-49-meeting-item"><span>Expand module is removed</span></li>
-                                            <li class="widget-49-meeting-item"><span>Data migration is in scope</span></li>
-                                            <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li>
-                                        </ol>
                                         <hr>
                                 {% endfor %}
 {#                              <div class="post-comment">#}
