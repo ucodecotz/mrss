@@ -100,8 +100,9 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body" >
-                    <form method="post" action="{% url 'core:presentProblem' %}">
-                        {% csrf_token %}
+
+                    <form method="post" action="{% url 'core:presentProblem' %} " enctype="multipart/form-data">
+                    {% csrf_token %}
                         <div class="form-row">
                           <div class="form-group col-md-6 mb-0">
                             {{ form.title|as_crispy_field }}
@@ -122,9 +123,13 @@
                           <div class="form-group col-md-2 mb-0">
 
                           </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+
+
+                        <button type="submit" class="btn btn-primary">submit</button>
 
                       </form>
+
+
                 </div>
               </div>
             </div>

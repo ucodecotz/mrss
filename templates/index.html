@@ -107,7 +107,7 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <a href="{% url 'core:problem_details' problem.slug %} "><i class="fas fa-circle text-primary">{{problem.solution_set.count }}</i> <B>Solutions</B> </a>
+                      <a class=" btn btn-outline-primary" href="{% url 'core:problem_details' problem.slug %} "> <i class="fas fa-circle text-primary "> {{problem.solution_set.count }}</i> <B>Solutions</B> </a>
                     </span>
 {#                    <span class="mr-2">#}
 {#                       <a href="{% url 'core:add_solutions' %}"><i class="fas fa-circle text-success"></i> <b>Add solution</b></a>#}

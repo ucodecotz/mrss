@@ -27,12 +27,16 @@ DEVICE_BRAND_CHOICE = (
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     images = models.FileField(upload_to='user_profile')
+    expert_to = models.CharField(choices=DEVICE_BRAND_CHOICE, max_length=200, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = ' Uer profile'
 
     def __str__(self):
         return str(self.user.username)
+
+    def get_full_name(self):
+        return f'{self.user.first_name + " " + self.user.last_name}'
 
 
 def userprofile_receiver(sender, instance, created, *args, **kwargs):
@@ -47,7 +51,7 @@ class Problems(models.Model):
     user = models.ForeignKey(UserProfile,
                              on_delete=models.CASCADE)
     title = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(upload_to='Pro_image', null=True, blank=True)
+    image = models.FileField(upload_to='Pro_image', null=True, blank=True)
     # Problem_code = models.CharField(max_length=200, null=True, blank=True)
     problem_type = models.CharField(max_length=200,
                                     choices=PROBLEM_TYPE, null=True, blank=True)
@@ -56,7 +60,7 @@ class Problems(models.Model):
     created_on = models.DateTimeField(default=timezone.now)
     device_type = models.CharField(max_length=200, choices=DEVICE_TYPE_CHOICE, null=True, blank=True)
     device_brand = models.CharField(max_length=200, choices=DEVICE_BRAND_CHOICE, null=True, blank=True)
-    problem_desc = models.TextField(null= True, blank=True)
+    problem_desc = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'Problems'
@@ -76,21 +80,22 @@ class Solution(models.Model):
         verbose_name_plural = 'Solutions'
 
     def __str__(self):
-        return self.user.user
+        return str(self.user.user)
 
 
 class Comments(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(UserProfile,
                              on_delete=models.CASCADE)
     content = models.TextField(null=True, blank=True)
     solution_id = models.ForeignKey(Solution, on_delete=models.CASCADE,
                                     null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'Comments'
 
     def __str__(self):
-        return self.user.username
+        return str(self.user)
 
 
 # eg.

@@ -39,7 +39,11 @@
                                 </div>
                             </div>
                             <div class="post-container">
+                            {% if object.user.images  %}
                             <img src="{{ object.user.images.url}}" alt="user" class="profile-photo-md pull-left">
+                                {% else %}
+                                <img width="80px" height="50px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQSvdl382q8a8hXT9ZSG6hASePoNH_bqAa4Lg&usqp=CAU" alt="">
+                            {% endif %}
                             <div class="post-detail">
                               <div class="user-info">
                                 <h5><a href="#" class="profile-link">{{ object.user }}</a> <span class="following"></span></h5>
@@ -54,12 +58,12 @@
                                   <form method="post" action=" {% url 'core:post_solution' object.id  %}">
                                     {% csrf_token %}
                                     <div class="form-row">
-                                      <div class="form-group col-md-6 mb-0">
+                                      <div class="form-group col-md-12 mb-0">
                                         {{ form.content|as_crispy_field }}
                                       </div>
 
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button class="btn btn-info waves-effect waves-light" type="submit" class="btn btn-primary">Send</button>
 
                                   </form>
                               </div>
