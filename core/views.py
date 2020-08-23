@@ -30,22 +30,28 @@ class PresentProblem(View):
 
         if form.is_valid():
             print(form)
-            device_type = form.cleaned_data.get('device_type')
-            device_brand = form.cleaned_data.get('device_brand')
-            title = form.cleaned_data.get('title')
-            image = form.cleaned_data.get('image')
-            problem_desc = form.cleaned_data.get('problem_desc')
-            problem = Problems()
-            problem.user = self.request.user.userprofile
-            problem.title = title
-            problem.image = image
-            problem.device_brand = device_brand
-            problem.device_type = device_type
-            problem.problem_desc = problem_desc
-            problem.slug = slugify(title)
-            problem.save()
-            messages.success(self.request, 'Thanks for presenting your problem to MRSS')
-            return redirect('/')
+            slug = slugify(form.cleaned_data.get('title'))
+            present_problem = Problems.objects.filter(slug=slug)
+            if present_problem.exists():
+                messages.warning(self.request, ' Sorry already presented, Try another way')
+                return redirect('core:presentProblem')
+            else:
+                device_type = form.cleaned_data.get('device_type')
+                device_brand = form.cleaned_data.get('device_brand')
+                title = form.cleaned_data.get('title')
+                image = form.cleaned_data.get('image')
+                problem_desc = form.cleaned_data.get('problem_desc')
+                problem = Problems()
+                problem.user = self.request.user.userprofile
+                problem.title = title
+                problem.image = image
+                problem.device_brand = device_brand
+                problem.device_type = device_type
+                problem.problem_desc = problem_desc
+                problem.slug = slugify(title)
+                problem.save()
+                messages.success(self.request, 'Thanks for presenting your problem to MRSS')
+                return redirect('/')
         else:
             print('form not valid')
             messages.warning(self.request, 'Your form was not valid try to fill all field')
@@ -100,7 +106,7 @@ def post_comments(request, pk):
         if form.is_valid():
             content = form.cleaned_data.get('content')
             new_comment = Comments()
-            new_comment.user = request.user
+            new_comment.user = request.user.userprofile
             new_comment.solution_id = solution
             new_comment.content = content
             new_comment.save()
@@ -122,20 +128,6 @@ def View_comments(request, pk=None):
     }
     return render(request, 'comments.html', context)
 
-
-# def predict_chances(request):
-#     # Receive data from client
-#     # gre = int(request.GET['gre'])
-#     # toefl = int(request.GET['toefl'])
-#     # cgpa = float(request.GET['cgpa'])
-#     if request.method == "POST":
-#         gre = int(request.POST['gre_score'])
-#         toefl = int(request.POST['toefl_score'])
-#         cgpa = float(request.POST['cgpa'])
-#
-#         model = pd.read_pickle(r"/home/jena/PycharmProjects/mrss/core/lr_model.pickle")
-#         chances = model.predict([[gre, toefl, cgpa]])
-#         return HttpResponse(f"{chances[0] * 100:.2f}%")
 
 
 # Todo  add models data to tempalate

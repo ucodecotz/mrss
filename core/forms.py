@@ -20,16 +20,16 @@ class CommentForm(forms.Form):
 
 
 class ProblemForm(forms.Form):
-    title = forms.CharField(widget=forms.TextInput(attrs={
+    title = forms.CharField( label='Problem title',widget=forms.TextInput(attrs={
         'class': 'form-control'
     }))
-    image = forms.FileField(widget=forms.FileInput(attrs={
+    image = forms.FileField(label='Problem image',widget=forms.FileInput(attrs={
         'class': 'form-control'
     }))
     problem_desc = forms.CharField(widget=forms.Textarea(attrs={
         'class': 'form-control',
         'cols': 25,
-        'rows': 6
+        'rows': 4
     }))
     device_type = forms.ChoiceField(choices=DEVICE_TYPE_CHOICE, widget=forms.Select(attrs={
         'class': 'form-control'

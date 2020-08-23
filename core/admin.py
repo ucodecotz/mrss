@@ -12,7 +12,7 @@ class ProblemsAdmin(admin.ModelAdmin):
 admin.site.register(Problems, ProblemsAdmin)
 admin.site.register(Solution)
 admin.site.register(Comments)
-admin.site.register(BlogPost)
+# admin.site.register(BlogPost)
 admin.site.register(UserProfile)
 
 

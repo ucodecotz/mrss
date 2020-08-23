@@ -76,7 +76,7 @@ class Solution(models.Model):
         verbose_name_plural = 'Solutions'
 
     def __str__(self):
-        return self.user.user
+        return str(self.user.user)
 
 
 class Comments(models.Model):
@@ -91,7 +91,7 @@ class Comments(models.Model):
         verbose_name_plural = 'Comments'
 
     def __str__(self):
-        return self.user.username
+        return str(self.user)
 
 
 # eg.
