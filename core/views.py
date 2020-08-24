@@ -42,6 +42,8 @@ class PresentProblem(View):
                 image = form.cleaned_data.get('image')
                 problem_desc = form.cleaned_data.get('problem_desc')
                 problem = Problems()
+
+                print(problem.device_brand)
                 problem.user = self.request.user.userprofile
                 problem.title = title
                 problem.image = image
@@ -50,7 +52,14 @@ class PresentProblem(View):
                 problem.problem_desc = problem_desc
                 problem.slug = slugify(title)
                 problem.save()
-                messages.success(self.request, 'Thanks for presenting your problem to MRSS')
+                if problem.device_brand == 'T':
+                    messages.success(self.request, 'Thanks for presenting your problem to Teckno expert ')
+                elif problem.device_brand == 'S':
+                    messages.success(self.request, 'Thanks for presenting your problem to Samsung expert ')
+                elif problem.device_brand == 'u':
+                    messages.success(self.request, 'Thanks for presenting your problem to Huawei expert ')
+                elif problem.device_brand == 'I':
+                    messages.success(self.request, 'Thanks for presenting your problem to Iphone expert ')
                 return redirect('/')
         else:
             print('form not valid')

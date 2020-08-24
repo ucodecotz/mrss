@@ -10,7 +10,7 @@ DEVICE_BRAND_CHOICE = (
     ('T', 'Teckno'),
     ('S', 'Samsung'),
     ('U', 'Huawei'),
-    ('O', 'Oppo'),
+    ('I', 'Iphone'),
 
 )
 

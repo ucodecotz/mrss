@@ -12,15 +12,14 @@ PROBLEM_TYPE = (
 )
 DEVICE_TYPE_CHOICE = (
     ('A', 'Android'),
-    ('I', 'Ios')
+    # ('I', 'Ios')
 )
 
 DEVICE_BRAND_CHOICE = (
     ('T', 'Teckno'),
     ('S', 'Samsung'),
     ('U', 'Huawei'),
-    ('O', 'Oppo'),
-
+    ('I', 'Iphone'),
 )
 
 
