@@ -4,6 +4,8 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.db.models.signals import post_save
 from django.utils import timezone
+from django.contrib.contenttypes.fields import GenericRelation
+from star_ratings.models import Rating
 
 PROBLEM_TYPE = (
     ('H', 'Hardware problem'),
@@ -74,6 +76,7 @@ class Solution(models.Model):
     user = models.ForeignKey(UserProfile,
                              on_delete=models.CASCADE)
     content = RichTextField(null=True, blank=True)
+
 
     class Meta:
         verbose_name_plural = 'Solutions'

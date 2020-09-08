@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load ratings %}
 
 
       <!-- Main Content -->
@@ -103,9 +104,12 @@
                       {% if problem.image %}
                           <a href="{% url 'core:problem_details' problem.slug %} "><img height=" 200px" width="289px"  src="{{problem.image.url }}" alt=""></a>
                       {% endif %}
+                      <hr class="mt-3">
+                     {% ratings problem %}
 
                   </div>
-                  <div class="mt-4 text-center small">
+                    <hr>
+                  <div class="mt- text-center small">
                     <span class="mr-2">
                       <a class=" btn btn-outline-primary" href="{% url 'core:problem_details' problem.slug %} "> <i class="fas fa-circle text-primary "> {{problem.solution_set.count }}</i> <B>Solutions</B> </a>
                     </span>

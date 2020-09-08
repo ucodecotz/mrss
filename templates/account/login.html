@@ -41,7 +41,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {#        {{ form.email|as_crispy_field }}#}
 {#      </div>#}
       <div class="form-group col-md-6 mb-0">
-        {{ form|crispy}}
+        {{ form.as_p}}
       </div>
     </div>
 {#  {{ form.as_p }}#}

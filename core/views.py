@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 # import pandas as pd
@@ -33,6 +34,7 @@ class PresentProblem(View):
             slug = slugify(form.cleaned_data.get('title'))
             present_problem = Problems.objects.filter(slug=slug)
             if present_problem.exists():
+                # TODO add some functionality
                 messages.warning(self.request, ' Sorry already presented, Try another way')
                 return redirect('core:presentProblem')
             else:
@@ -76,6 +78,7 @@ class AddSolutionsView(View):
         return render(self.request, 'add_solution.html', context)
 
 
+@login_required
 def post_solutions(request, pk=None):
     problem = get_object_or_404(Problems, pk=pk)
     if request.method == "POST":
@@ -136,7 +139,6 @@ def View_comments(request, pk=None):
         'comment': comments_qs
     }
     return render(request, 'comments.html', context)
-
 
 
 # Todo  add models data to tempalate

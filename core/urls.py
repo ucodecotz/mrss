@@ -14,5 +14,6 @@ urlpatterns = [
     path('post_solution/<int:pk>', views.post_solutions, name='post_solution'),
     path('profile/', views.Profile.as_view(), name='profile'),
 
+
 ]
 

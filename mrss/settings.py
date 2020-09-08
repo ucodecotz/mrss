@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'ckeditor',
     'crispy_forms',
+    'star_ratings',
 
 
     # authentications app, is third part app
